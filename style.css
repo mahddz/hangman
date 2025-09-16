@@ -1,0 +1,330 @@
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --main-border: 4px solid black;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    margin: 20px auto;
+    width: 1000px;
+
+    .row {
+        display: flex;
+    }
+
+    .game-info {
+        display: flex;
+
+        hr {
+            border: 1px solid black;
+        }
+
+        .game-name {
+            flex: 1;
+        }
+
+        .category {
+            flex: 1;
+            text-align: right;
+
+            span {
+                font-weight: bold;
+                text-transform: capitalize;
+                color: #e91e63;
+            }
+        }
+    }
+
+
+    .hangeman-draw {
+        flex: 1;
+        background-color: #F8F8F8;
+        width: 20px;
+        padding: 20px;
+        height: 324px;
+
+
+        .the-draw {
+            width: 60px;
+            height: 250px;
+            border-bottom: var(--main-border);
+            position: relative;
+            margin: auto;
+            display: none;
+
+            .the-stand {
+                width: 10px;
+                height: 100%;
+                border-left: var(--main-border);
+                position: absolute;
+                bottom: 0;
+                left: 45%;
+                display: none;
+            }
+
+            .the-hang {
+                display: none;
+            }
+
+            .the-hang::before {
+                content: "";
+                width: 100px;
+                height: 10px;
+                border-top: var(--main-border);
+                position: absolute;
+                top: 10px;
+                left: 28px;
+            }
+
+            .the-hang::after {
+                content: "";
+                width: 10px;
+                height: 30px;
+                border-left: var(--main-border);
+                position: absolute;
+                top: 10px;
+                left: 125px;
+            }
+
+            .the-rop {
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                border: 4px dashed black;
+                position: absolute;
+                top: 39px;
+                left: 94px;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -ms-border-radius: 50%;
+                -o-border-radius: 50%;
+                display: none;
+            }
+
+
+            .head {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: var(--main-border);
+                position: absolute;
+                top: 49px;
+                left: 104px;
+                -webkit-border-radius: 50%;
+                -moz-border-radius: 50%;
+                -ms-border-radius: 50%;
+                -o-border-radius: 50%;
+                display: none;
+            }
+
+            .body {
+                width: 4px;
+                height: 76px;
+                background-color: black;
+                position: absolute;
+                top: 99px;
+                left: 128px;
+                display: none;
+            }
+
+            .hand {
+                display: none;
+            }
+
+            .hand::before {
+                content: "";
+                width: 60px;
+                height: 4px;
+                background-color: black;
+                position: absolute;
+                top: 138px;
+                left: 122px;
+                transform: rotate(40deg);
+                -webkit-transform: rotate(40deg);
+                -moz-transform: rotate(40deg);
+                -ms-transform: rotate(40deg);
+                -o-transform: rotate(40deg);
+            }
+
+            .hand::after {
+                content: "";
+                width: 60px;
+                height: 4px;
+                background-color: black;
+                position: absolute;
+                top: 138px;
+                left: 78px;
+                transform: rotate(-40deg);
+                -webkit-transform: rotate(-40deg);
+                -moz-transform: rotate(-40deg);
+                -ms-transform: rotate(-40deg);
+                -o-transform: rotate(-40deg);
+            }
+
+            .leg {
+                display: none;
+            }
+
+            .leg::before {
+                content: "";
+                width: 60px;
+                height: 4px;
+                background-color: black;
+                position: absolute;
+                top: 192px;
+                left: 122px;
+                transform: rotate(45deg);
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+            }
+
+            .leg::after {
+                content: "";
+                width: 60px;
+                height: 4px;
+                background-color: black;
+                position: absolute;
+                top: 192px;
+                left: 78px;
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+            }
+
+
+
+        }
+    }
+
+    .hangeman-draw.wrong-1 .the-draw {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-2 .the-stand {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-3 .the-hang {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-4 .the-rop {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-5 .head {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-6 .body {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-7 .hand {
+        display: block;
+    }
+
+    .hangeman-draw.wrong-8 .leg {
+        display: block;
+    }
+
+    .letters {
+        flex: 1;
+        padding: 20px;
+        text-align: center;
+
+        .letter-box {
+            display: inline-block;
+            background-color: rgb(4, 81, 120);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .clicked {
+            background-color: #757171;
+            cursor: not-allowed;
+        }
+    }
+
+    .finished {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    .letters-guess {
+        margin: 20px auto;
+        background-color: #F8F8F8;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        min-height: 104px;
+
+        span {
+            width: 60px;
+            height: 60px;
+            border-bottom: 2px solid rgb(1, 59, 42);
+            margin: 5px;
+            background-color: #fff;
+            font-size: 24px;
+            text-align: center;
+            line-height: 60px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.3s;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+            -ms-transition: 0.3s;
+            -o-transition: 0.3s;
+
+        }
+
+        span.space {
+            width: 20px;
+            height: 60px;
+            border: none;
+            background-color: #F8F8F8;
+            position: relative;
+
+        }
+
+        span.space::before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 3px;
+            background-color: #000;
+            left: 0;
+            top: 50%;
+        }
+    }
+}
+
+.popup {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(4, 81, 120);
+    color: white;
+    padding: 20px;
+    font-size: 24px;
+    border-radius: 50px;
+    z-index: 1000;
+    text-transform: uppercase;
+
+}
